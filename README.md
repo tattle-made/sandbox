@@ -1,23 +1,6 @@
-# Pre requisite
-typescript
+# Notes
 
+use this to spin up a multi docker environment on elastic beanstalk.
 
-to start the dev server run : 
-
-Start a redis server. The job queue depends on it. 
-`docker run -d -p 6379:6379 --name tattle-job-queue redis`
-`npm run start-dev`
-
-
-# Production
-Start a redis server. The job queue depends on it. 
-`docker run -d -p 6379:6379 --name tattle-job-queue redis`
-
-`npm run build`
-`forever start build/index.js`
-
-
-# Convention
-We use camelCase for variables within the code
-for parameter names coming from APIs
-for column names in sql db
+As an optimization, its recommended to terminate the elastic beanstlk environment once you are done using it.
+To ensure all automation scripts work as expected make sure that when you recreate the environment its named 'project-one'
