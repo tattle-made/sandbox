@@ -20,8 +20,8 @@ export class DBStack extends cdk.Stack {
 
     this.prefix = props?.prefix ? props.prefix : "";
 
-    const engine = rds.DatabaseInstanceEngine.postgres({
-      version: rds.PostgresEngineVersion.VER_13,
+    const engine = rds.DatabaseInstanceEngine.mysql({
+      version: rds.MysqlEngineVersion.VER_5_7_33,
     });
 
     // Create the VPC if needed
@@ -60,7 +60,7 @@ export class DBStack extends cdk.Stack {
       storageType: rds.StorageType.IO1,
       publiclyAccessible: false,
       securityGroups: [ securityGroup ],
-      storageEncrypted: true,
+      // storageEncrypted: true,
       enablePerformanceInsights: true,
       removalPolicy: cdk.RemovalPolicy.RETAIN,
     });
