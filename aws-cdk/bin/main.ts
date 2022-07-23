@@ -5,5 +5,5 @@ import { DBStack } from "../lib/db";
 const app = new cdk.App();
 
 new DBStack(app, "DBStack", {
-  env: { account: "628038590822", region: "ap-south-1" },
+  env: { account: process.env.AWS_ACCOUNT, region: process.env.AWS_REGION },
 });
