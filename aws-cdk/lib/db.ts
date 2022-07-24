@@ -19,6 +19,7 @@ export class DBStack extends cdk.Stack {
     super(scope, id, props);
 
     this.prefix = props.prefix ? props.prefix : "";
+    this.prefix = id + this.prefix;
 
     const engine = rds.DatabaseInstanceEngine.mysql({
       version: rds.MysqlEngineVersion.VER_5_7_33,
