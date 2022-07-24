@@ -4,7 +4,7 @@ import * as rds from "@aws-cdk/aws-rds";
 
 export interface StackProps extends cdk.StackProps {
   prefix?: string;
-  vpc?: ec2.Vpc;
+  vpcId: string;
 }
 
 
@@ -12,24 +12,23 @@ export class DBStack extends cdk.Stack {
 
   db: rds.DatabaseInstance;
   prefix: string;
-  vpc: ec2.Vpc;
+  vpc: ec2.IVpc;
 
   constructor(scope: cdk.Construct, id: string,
-              props?: StackProps) {
+              props: StackProps) {
     super(scope, id, props);
 
-    this.prefix = props?.prefix ? props.prefix : "";
+    this.prefix = props.prefix ? props.prefix : "";
 
     const engine = rds.DatabaseInstanceEngine.mysql({
       version: rds.MysqlEngineVersion.VER_5_7_33,
     });
 
     // Create the VPC if needed
-    const vpc = props?.vpc ? props.vpc :
-      new ec2.Vpc(this, this.prefix + "TattleVPC", {
-        maxAzs: 2, // Default is all AZs in region
-      });
-    this.vpc = vpc;
+    this.vpc = ec2.Vpc.fromLookup(this, props.vpcId, {
+      region: "ap-south-1",
+      vpcId: props.vpcId,
+    });
 
     const securityGroup = new ec2.SecurityGroup(this, this.prefix + "DBSecurityGroup", {
       vpc: this.vpc,
@@ -46,7 +45,7 @@ export class DBStack extends cdk.Stack {
       instanceIdentifier: this.prefix + "DB",
       engine: engine,
       vpc: this.vpc,
-      // vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
+      vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
       allocatedStorage: 100,
       allowMajorVersionUpgrade: false,
       autoMinorVersionUpgrade: false,
