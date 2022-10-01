@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tattle-debug
+  labels:
+    app.kubernetes.io/name: tattle-debug
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: tattle-debug
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: tattle-debug
+    spec:
+      containers:
+        - name: tattle-debug
+          image: node:18-alpine3.15
+          command: ["tail"]
+          args: ["-f", "/dev/null"]
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 3000
