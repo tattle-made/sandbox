@@ -44,13 +44,13 @@ jobs:
           name: tattletech/debug-container-node
           tags: ${{ steps.vars.outputs.sha_short }}
           workdir: debug-container-node/
-      # - name: deploy to cluster
-      #   uses: steebchen/kubectl@v2.0.0
-      #   with:
-      #     config: ${{ secrets.PROD_KUBE_CONFIG_DATA }}
-      #     command: set image --record deployment/debug-container-node debug-container-node=tattletech/debug-container-node:${{ steps.vars.outputs.sha_short }}
-      # - name: verify deployment
-      #   uses: steebchen/kubectl@v2.0.0
-      #   with:
-      #     config: ${{ secrets.PROD_KUBE_CONFIG_DATA }}
-      #     command: rollout status deployment/debug-container-node
+      - name: deploy to cluster
+        uses: steebchen/kubectl@v2.0.0
+        with:
+          config: ${{ secrets.PROD_KUBE_CONFIG_DATA }}
+          command: set image --record deployment/debug-container-node debug-container-node=tattletech/debug-container-node:${{ steps.vars.outputs.sha_short }}
+      - name: verify deployment
+        uses: steebchen/kubectl@v2.0.0
+        with:
+          config: ${{ secrets.PROD_KUBE_CONFIG_DATA }}
+          command: rollout status deployment/debug-container-node

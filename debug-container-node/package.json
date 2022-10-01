@@ -1,0 +1,15 @@
+{
+  "name": "debug-container-node",
+  "version": "1.0.0",
+  "description": "An App that deploys to tattle's k8 cluster. This app gives you a node and alpine environment inside the cluster. It also includes tools like vim, git and curl",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}

@@ -15,9 +15,7 @@ spec:
     spec:
       containers:
         - name: tattle-debug
-          image: node:18-alpine3.15
-          command: ["tail"]
-          args: ["-f", "/dev/null"]
+          image: tattletech/debug-container-node:c3c4b6f
           resources:
             limits:
               memory: "128Mi"
