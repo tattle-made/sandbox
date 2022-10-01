@@ -27,7 +27,7 @@ jobs:
     needs: changes
     if: ${{needs.changes.outputs.debug-container-node=='true'}}
     steps:
-      - uses: action/checkout@v2
+      - uses: actions/checkout@v2
         with:
           ref: main
       - name: Get Commit SHA
