@@ -18,7 +18,7 @@ jobs:
       - uses: dorny/paths-filter@v2.2.0
         id: filter
         with:
-          filter: |
+          filters: |
             debug-container-node:
               - 'debug-container-node/**/*'
 
