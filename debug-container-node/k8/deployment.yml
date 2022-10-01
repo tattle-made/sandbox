@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: tattle-debug
-          image: tattletech/debug-container-node:c3c4b6f
+          image: tattletech/debug-container-node:813643b
           resources:
             limits:
               memory: "128Mi"
