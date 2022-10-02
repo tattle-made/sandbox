@@ -62,5 +62,5 @@ jobs:
               - password=${{ secrets.K8_TATTLE_DEBUG_ONE }}
           " >> kustomization.yml
           cat kustomization.yml
-          ./kubectl kustomize .
+          kubectl kustomize .
           echo $steps.vars.outputs.SHA_SHORT
