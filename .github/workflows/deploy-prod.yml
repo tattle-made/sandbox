@@ -61,8 +61,8 @@ jobs:
           secretGenerator:
           - name: tattle-debug
             literals:
-            - USERNAME=one
-            - PASSWORD=two
+            - USERNAME=$K8_TATTLE_DEBUG_ONE
+            - PASSWORD=$K8_TATTLE_DEBUG_TWO
           " >> kustomization.yml
           cat kustomization.yml
           kubectl kustomize .
