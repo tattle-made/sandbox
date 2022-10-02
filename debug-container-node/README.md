@@ -16,4 +16,4 @@ cd debug-container-node/k8
 kubectl apply -f .
 ```
 
-v 0.0.17
+v 0.0.18
