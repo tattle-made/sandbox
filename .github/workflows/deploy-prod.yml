@@ -56,6 +56,7 @@ jobs:
               literals:
               - userame=${{ secrets.K8_TATTLE_DEBUG_ONE }}
               - password=${{ secrets.K8_TATTLE_DEBUG_ONE }}
-          " >> kustomization.yml
-          ./kubectl kustomize $APP_NAME
+          " >> k8/kustomization.yml
+          cd debug-container-node/k8
+          ./kubectl kustomize .
           echo $steps.vars.outputs.SHA_SHORT
