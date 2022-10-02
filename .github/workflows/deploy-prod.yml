@@ -80,7 +80,7 @@ jobs:
           ls
           echo "
           images:
-          - name: $APP_NAME
+          - name: IMAGE-NAME
             newName: gcr.io/$PROJECT_ID/$APP_NAME
             newTag: $GITHUB_SHA
           secretGenerator:
