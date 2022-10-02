@@ -58,11 +58,11 @@ jobs:
           cd debug-container-node/k8
           ls
           echo "
-            secretGenerator:
-            - name: tattle-debug
-              literals:
-              - userame=one
-              - password=two
+          secretGenerator:
+          - name: tattle-debug
+            literals:
+            - USERNAME=one
+            - PASSWORD=two
           " >> kustomization.yml
           cat kustomization.yml
           kubectl kustomize .
