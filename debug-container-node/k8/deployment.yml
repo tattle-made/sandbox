@@ -20,9 +20,6 @@ spec:
               cpu: "500m"
           ports:
             - containerPort: 3000
-          env:
-            - name: COMMIT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: tattle-debug
-                  key: COMMIT_ID
+          envFrom:
+            - secretRef:
+                name: tattle-debug
