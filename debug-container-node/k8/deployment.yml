@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tattle-debug
-  labels:
-    app.kubernetes.io/name: tattle-debug
 spec:
   selector:
     matchLabels:

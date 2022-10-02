@@ -1,0 +1,12 @@
+commonLabels:
+  app.kubernetes.io/name: tattle-debug
+resources:
+  - deployment.yml
+  - service.yml
+
+secretGenerator:
+- name: tattle-debug
+  literals:
+  - userame=admin
+  - password=secret
+

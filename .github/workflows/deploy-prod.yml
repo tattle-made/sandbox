@@ -5,6 +5,13 @@ on:
     branches:
       - main
 
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GKE_CLUSTER: cluster-1
+  GKE_ZONE: us-central1-c
+  DEPLOYMENT_NAME: tattle-debug
+  APP_NAME: debug-container-node
+
 jobs:
   changes:
     runs-on: ubuntu-latest
@@ -35,22 +42,20 @@ jobs:
         shell: bash
         run: |
           echo "Setting SHA"
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-      - name: Publish To Docker
-        uses: elgohr/Publish-Docker-Github-Action@master
-        with:
-          username: tattletech
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          name: tattletech/debug-container-node
-          tags: ${{ steps.vars.outputs.sha_short }}
-          workdir: debug-container-node/
-      - name: deploy to cluster
-        uses: steebchen/kubectl@v2.0.0
-        with:
-          config: ${{ secrets.K8_GKE_SANDBOX_CLUSTER }}
-          command: set image --record deployment/debug-container-node debug-container-node=tattletech/debug-container-node:${{ steps.vars.outputs.sha_short }}
-      - name: verify deployment
-        uses: steebchen/kubectl@v2.0.0
-        with:
-          config: ${{ secrets.K8_GKE_SANDBOX_CLUSTER }}
-          command: rollout status deployment/debug-container-node
+          echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
+      - name: Set up Kustomize
+        run: |-
+          curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+          chmod u+x ./kustomize
+          - name: Deploy
+      - name: Deploy
+        run: |-
+          echo "
+            secretGenerator:
+            - name: tattle-debug
+              literals:
+              - userame=${{ secrets.K8_TATTLE_DEBUG_ONE }}
+              - password=${{ secrets.K8_TATTLE_DEBUG_ONE }}
+          " >> kustomization.yml
+          kubectl kustomize $APP_NAME
+          echo $steps.vars.outputs.SHA_SHORT
