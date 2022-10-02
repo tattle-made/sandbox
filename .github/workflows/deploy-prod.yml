@@ -51,7 +51,7 @@ jobs:
           mkdir -p ~/.local/bin
           mv ./kubectl ~/.local/bin/kubectl
       - name: Deploy
-        env: # Or as an environment variable
+        env:
           K8_TATTLE_DEBUG_ONE: ${{ secrets.K8_TATTLE_DEBUG_ONE }}
           K8_TATTLE_DEBUG_TWO: ${{ secrets.K8_TATTLE_DEBUG_TWO }}
         run: |-
@@ -61,8 +61,8 @@ jobs:
             secretGenerator:
             - name: tattle-debug
               literals:
-              - userame=$K8_TATTLE_DEBUG_ONE
-              - password=$K8_TATTLE_DEBUG_TWO
+              - userame=one
+              - password=two
           " >> kustomization.yml
           cat kustomization.yml
           kubectl kustomize .
