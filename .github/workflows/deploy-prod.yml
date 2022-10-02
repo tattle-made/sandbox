@@ -88,6 +88,7 @@ jobs:
             literals:
             - USERNAME=$K8_TATTLE_DEBUG_ONE
             - PASSWORD=$K8_TATTLE_DEBUG_TWO
+            - COMMIT_ID=$GITHUB_SHA
           " >> kustomization.yml
           cat kustomization.yml
           kubectl kustomize . | kubectl apply -f -
