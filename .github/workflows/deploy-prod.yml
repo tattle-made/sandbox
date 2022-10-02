@@ -43,11 +43,11 @@ jobs:
         run: |
           echo "Setting SHA"
           echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
-      - name: Set up Kustomize
+      - name: Set up Kubectl
         run: |-
-          curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
-          chmod u+x ./kustomize
-          - name: Deploy
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod u+x kubectl
+          kubectl version --client
       - name: Deploy
         run: |-
           echo "
@@ -57,5 +57,5 @@ jobs:
               - userame=${{ secrets.K8_TATTLE_DEBUG_ONE }}
               - password=${{ secrets.K8_TATTLE_DEBUG_ONE }}
           " >> kustomization.yml
-          kubectl kustomize $APP_NAME
+          ./kubectl kustomize $APP_NAME
           echo $steps.vars.outputs.SHA_SHORT
