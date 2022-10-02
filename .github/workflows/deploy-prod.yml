@@ -8,7 +8,7 @@ on:
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT_ID }}
   GKE_CLUSTER: sandbox
-  GKE_ZONE: asia-south1-b
+  GKE_ZONE: asia-south1
   DEPLOYMENT_NAME: tattle-debug
   APP_NAME: debug-container-node
 
