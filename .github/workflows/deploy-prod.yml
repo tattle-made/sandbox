@@ -79,6 +79,10 @@ jobs:
           cd debug-container-node/k8
           ls
           echo "
+          images:
+          - name: $APP_NAME
+            newName: gcr.io/$PROJECT_ID/$APP_NAME
+            newTag: $GITHUB_SHA
           secretGenerator:
           - name: tattle-debug
             literals:
