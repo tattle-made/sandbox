@@ -50,13 +50,14 @@ jobs:
           kubectl version --client
       - name: Deploy
         run: |-
+          cd debug-container-node/k8
+          ls
           echo "
             secretGenerator:
             - name: tattle-debug
               literals:
               - userame=${{ secrets.K8_TATTLE_DEBUG_ONE }}
               - password=${{ secrets.K8_TATTLE_DEBUG_ONE }}
-          " >> k8/kustomization.yml
-          cd debug-container-node/k8
+          " >> kustomization.yml
           ./kubectl kustomize .
           echo $steps.vars.outputs.SHA_SHORT
