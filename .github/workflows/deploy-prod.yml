@@ -48,6 +48,8 @@ jobs:
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
           chmod u+x kubectl
           kubectl version --client
+          mkdir -p ~/.local/bin
+          mv ./kubectl ~/.local/bin/kubectl
       - name: Deploy
         run: |-
           cd debug-container-node/k8
@@ -59,5 +61,6 @@ jobs:
               - userame=${{ secrets.K8_TATTLE_DEBUG_ONE }}
               - password=${{ secrets.K8_TATTLE_DEBUG_ONE }}
           " >> kustomization.yml
+          cat kustomization.yml
           ./kubectl kustomize .
           echo $steps.vars.outputs.SHA_SHORT
