@@ -1,5 +1,7 @@
 # Notes
 
+denny:v0
+
 use this to spin up a multi docker environment on elastic beanstalk.
 
 As an optimization, its recommended to terminate the elastic beanstlk environment once you are done using it.
