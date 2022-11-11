@@ -3,3 +3,12 @@
 # .elasticbeanstalk/*
 # !.elasticbeanstalk/*.cfg.yml
 # !.elasticbeanstalk/*.global.yml
+
+
+# Node
+**/node_modules
+
+# Aws CDK
+aws-cdk/**/*.js
+aws-cdk/cdk.out
+
